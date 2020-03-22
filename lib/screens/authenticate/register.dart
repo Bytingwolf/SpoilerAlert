@@ -26,9 +26,9 @@ class _RegisterState extends State<Register> {
     return loading
         ? Loading()
         : Scaffold(
-            backgroundColor: Colors.brown[100],
+            backgroundColor: Colors.red[100],
             appBar: AppBar(
-              backgroundColor: Colors.brown[400],
+              backgroundColor: Colors.red[400],
               elevation: 0.0,
               title: Text('Sign up to SpoilerAlert'),
               actions: <Widget>[
@@ -76,7 +76,7 @@ class _RegisterState extends State<Register> {
                         height: 20.0,
                       ),
                       RaisedButton(
-                          color: Colors.pink[400],
+                          color: Colors.red[600],
                           child: Text(
                             'Register',
                             style: TextStyle(color: Colors.white),

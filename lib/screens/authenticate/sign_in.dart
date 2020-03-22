@@ -26,9 +26,9 @@ class _SignInState extends State<SignIn> {
     return loading
         ? Loading()
         : Scaffold(
-            backgroundColor: Colors.brown[100],
+            backgroundColor: Colors.blue[100],
             appBar: AppBar(
-              backgroundColor: Colors.brown[400],
+              backgroundColor: Colors.blue[400],
               elevation: 0.0,
               title: Text('Sign in to SpoilerAlert'),
               actions: <Widget>[
@@ -76,7 +76,7 @@ class _SignInState extends State<SignIn> {
                         height: 20.0,
                       ),
                       RaisedButton(
-                          color: Colors.pink[400],
+                          color: Colors.blue[600],
                           child: Text(
                             'Sign in',
                             style: TextStyle(color: Colors.white),
