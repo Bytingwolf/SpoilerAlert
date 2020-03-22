@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spoiler_alert/screens/home/add_item.dart';
 import 'package:spoiler_alert/services/auth.dart';
 import 'package:spoiler_alert/shared/constants.dart';
 
@@ -25,18 +26,14 @@ class Home extends StatelessWidget {
               }).toList();
             },
           )
-          /*FlatButton.icon(
-              onPressed: () async {
-                await _auth.signOut();
-              },
-              icon: Icon(Icons.person),
-              label: Text('Logout'))*/
         ],
       ),
     );
   }
 
-  void choiceAction(String choice) {
-    print('Working');
+  void choiceAction(String choice) async {
+    if (choice == Constants.signOut) {
+      await _auth.signOut();
+    } else if (choice == Constants.addFood) {}
   }
 }

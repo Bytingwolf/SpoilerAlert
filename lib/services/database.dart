@@ -4,11 +4,13 @@ import 'dart:async';
 class DatabaseService {
   // Collection reference
 
+  final String uid;
+  DatabaseService({this.uid});
   final CollectionReference foodCollection =
       Firestore.instance.collection('foods');
 
   Future updateUserData(
       String foodName, String foodType, DateTime expiryDate) async {
-    return await foodCollection.document();
+    return await foodCollection.document(uid);
   }
 }
