@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "270851639605",
+    "firebase_url": "https://project1-7b782.firebaseio.com",
+    "project_id": "project1-7b782",
+    "storage_bucket": "project1-7b782.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:270851639605:android:04bc64e1433f07281de47c",
+        "android_client_info": {
+          "package_name": "com.byting_wolf.spoiler_alert"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "270851639605-kshe4j8g8u714hf4248hgdqp841gbicp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBB6v-5uOQQo3feJ-wWkNz1uN0vYBtUiWI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "270851639605-kshe4j8g8u714hf4248hgdqp841gbicp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:270851639605:android:729ff3ae8bebe2141de47c",
+        "android_client_info": {
+          "package_name": "com.thenetninja.brew_crew"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "270851639605-kshe4j8g8u714hf4248hgdqp841gbicp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBB6v-5uOQQo3feJ-wWkNz1uN0vYBtUiWI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "270851639605-kshe4j8g8u714hf4248hgdqp841gbicp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
