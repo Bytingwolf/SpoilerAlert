@@ -11,6 +11,10 @@ class DatabaseService {
 
   Future updateUserData(
       String foodName, String foodType, DateTime expiryDate) async {
-    return await foodCollection.document(uid);
+    return await foodCollection.document(uid).setData({
+      'name': foodName,
+      'type': foodType,
+      'expiry date': expiryDate,
+    });
   }
 }

@@ -34,6 +34,8 @@ class Home extends StatelessWidget {
   void choiceAction(String choice) async {
     if (choice == Constants.signOut) {
       await _auth.signOut();
-    } else if (choice == Constants.addFood) {}
+    } else if (choice == Constants.addFood) {
+      var addItem = new AddItem();
+    }
   }
 }

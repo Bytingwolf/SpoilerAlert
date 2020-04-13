@@ -37,8 +37,8 @@ class AddItemForm extends StatefulWidget {
 class AddItemFormState extends State<AddItemForm> {
   final _formKey = GlobalKey<FormState>();
 
-  String _foodName;
-  String _foodType;
+  String _foodName = '';
+  String _foodType = '';
   DateTime _expiryDate;
 
   @override
@@ -58,17 +58,24 @@ class AddItemFormState extends State<AddItemForm> {
             },
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: RaisedButton(
-              onPressed: () {
-                if (_formKey.currentState.validate()) {
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('Processing Data')));
-                }
-              },
-              child: Text('Submit'),
-            ),
-          ),
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child:
+                  /*RaisedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Cancel'),
+              ),*/
+                  RaisedButton(
+                onPressed: () {
+                  if (_formKey.currentState.validate()) {
+                    Scaffold.of(context).showSnackBar(
+                        SnackBar(content: Text('Processing Data')));
+                    Navigator.pop(context);
+                  }
+                },
+                child: Text('Submit'),
+              )),
         ],
       ),
     );
