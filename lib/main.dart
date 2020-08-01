@@ -1,3 +1,5 @@
+import 'package:spoiler_alert/screens/home/add_item.dart';
+import 'package:spoiler_alert/screens/home/home.dart';
 import 'package:spoiler_alert/screens/wrapper.dart';
 import 'package:spoiler_alert/services/auth.dart';
 import 'package:flutter/material.dart';

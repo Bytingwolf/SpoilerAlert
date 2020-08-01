@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spoiler_alert/screens/home/home.dart';
 import 'package:spoiler_alert/shared/constants.dart';
 
 class AddItem extends StatelessWidget {
@@ -6,23 +7,11 @@ class AddItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final appTitle = 'Add a food item';
 
-    return MaterialApp(
-      title: appTitle,
-      home: Scaffold(
-        appBar: AppBar(
-          actions: <Widget>[
-            FlatButton.icon(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.arrow_back),
-              label: null,
-            )
-          ],
-          title: Text(appTitle),
-        ),
-        body: AddItemForm(),
+    return new Scaffold(
+      appBar: AppBar(
+        title: Text(appTitle),
       ),
+      body: AddItemForm(),
     );
   }
 }
@@ -58,20 +47,28 @@ class AddItemFormState extends State<AddItemForm> {
             },
           ),
           Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child:
-                  /*RaisedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('Cancel'),
-              ),*/
-                  RaisedButton(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: RaisedButton(
+              onPressed: () {
+                Navigator.pop(context);
+                /*Navigator.of(context).push(
+                  new MaterialPageRoute(builder: (context) => Home()),
+                );*/
+              },
+              child: Text('Cancel'),
+            ),
+          ),
+          Padding(
+              padding: const EdgeInsets.symmetric(),
+              child: RaisedButton(
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
                     Scaffold.of(context).showSnackBar(
                         SnackBar(content: Text('Processing Data')));
                     Navigator.pop(context);
+                    /*Navigator.of(context).push(
+                      new MaterialPageRoute(builder: (context) => Home()),
+                    );*/
                   }
                 },
                 child: Text('Submit'),

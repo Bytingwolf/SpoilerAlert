@@ -8,34 +8,66 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.blue[50],
-      appBar: AppBar(
-        title: Text('SpoilerAlert'),
-        backgroundColor: Colors.blue[400],
-        elevation: 0.0,
-        actions: <Widget>[
-          PopupMenuButton<String>(
-            onSelected: choiceAction,
-            itemBuilder: (BuildContext context) {
-              return Constants.choices.map((String choice) {
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: Text(choice),
-                );
-              }).toList();
-            },
-          )
-        ],
-      ),
-    );
+    return WillPopScope(
+        onWillPop: () {
+          return showDialog(
+                context: context,
+                builder: (context) => new AlertDialog(
+                  title: new Text('Are you sure?'),
+                  content: new Text('Do you want to exit an App'),
+                  actions: <Widget>[
+                    new GestureDetector(
+                      onTap: () => Navigator.of(context).pop(false),
+                      child: Text("NO"),
+                    ),
+                    SizedBox(height: 16),
+                    new GestureDetector(
+                      onTap: () => Navigator.of(context).pop(true),
+                      child: Text("YES"),
+                    ),
+                  ],
+                ),
+              ) ??
+              false;
+        },
+        child: new Scaffold(
+          backgroundColor: Colors.blue[50],
+          appBar: AppBar(
+            title: Text('SpoilerAlert'),
+            backgroundColor: Colors.blue[400],
+            elevation: 0.0,
+            actions: <Widget>[
+              PopupMenuButton<String>(
+                onSelected: (choice) => choiceAction(choice, context),
+                itemBuilder: (BuildContext context) {
+                  return Constants.choices.map((String choice) {
+                    return PopupMenuItem<String>(
+                      value: choice,
+                      child: Text(choice),
+                    );
+                  }).toList();
+                },
+              )
+            ],
+          ),
+        ));
   }
 
-  void choiceAction(String choice) async {
+  void choiceAction(String choice, BuildContext context) async {
     if (choice == Constants.signOut) {
       await _auth.signOut();
     } else if (choice == Constants.addFood) {
-      var addItem = new AddItem();
+      Navigator.of(context).push(
+        new MaterialPageRoute(builder: (context) => AddItem()),
+      );
+    } else if (choice == Constants.editFood) {
+      /*Navigator.of(context).push(
+        new MaterialPageRoute(builder: (context) => EditItem()),
+      );*/
+    } else if (choice == Constants.settings) {
+      /*Navigator.of(context).push(
+        new MaterialPageRoute(builder: (context) => Settings()),
+      );*/
     }
   }
 }
