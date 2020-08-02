@@ -34,14 +34,15 @@ class _SignInState extends State<SignIn> {
                       content: new Text('Do you want to exit an App'),
                       actions: <Widget>[
                         new GestureDetector(
-                          onTap: () => Navigator.of(context).pop(false),
-                          child: Text("NO"),
-                        ),
-                        SizedBox(height: 16),
-                        new GestureDetector(
                           onTap: () => Navigator.of(context).pop(true),
                           child: Text("YES"),
                         ),
+                        SizedBox(height: 20),
+                        new GestureDetector(
+                          onTap: () => Navigator.of(context).pop(false),
+                          child: Text("NO"),
+                        ),
+                        SizedBox(height: 20),
                       ],
                     ),
                   ) ??

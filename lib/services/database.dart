@@ -7,7 +7,7 @@ class DatabaseService {
   final String uid;
   DatabaseService({this.uid});
   final CollectionReference foodCollection =
-      Firestore.instance.collection('foods');
+      Firestore.instance.collection('userId');
 
   Future updateUserData(
       String foodName, String foodType, DateTime expiryDate) async {

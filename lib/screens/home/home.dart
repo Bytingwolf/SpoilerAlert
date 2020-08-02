@@ -16,15 +16,17 @@ class Home extends StatelessWidget {
                   title: new Text('Are you sure?'),
                   content: new Text('Do you want to exit an App'),
                   actions: <Widget>[
-                    new GestureDetector(
-                      onTap: () => Navigator.of(context).pop(false),
-                      child: Text("NO"),
-                    ),
-                    SizedBox(height: 16),
+                    SizedBox(height: 30),
                     new GestureDetector(
                       onTap: () => Navigator.of(context).pop(true),
                       child: Text("YES"),
                     ),
+                    SizedBox(height: 30),
+                    new GestureDetector(
+                      onTap: () => Navigator.of(context).pop(false),
+                      child: Text("NO"),
+                    ),
+                    SizedBox(height: 30),
                   ],
                 ),
               ) ??
