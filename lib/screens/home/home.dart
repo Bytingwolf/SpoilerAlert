@@ -1,10 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spoiler_alert/bloc/food_bloc.dart';
 import 'package:spoiler_alert/screens/home/add_item.dart';
 import 'package:spoiler_alert/services/auth.dart';
+import 'package:spoiler_alert/services/database_provider.dart';
 import 'package:spoiler_alert/shared/constants.dart';
+import 'package:spoiler_alert/events/add_food.dart';
+import 'package:spoiler_alert/events/delete_food.dart';
+import 'package:spoiler_alert/events/set_foods.dart';
+import 'package:spoiler_alert/events/update_food.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  const Home({Key key}) : super(key: key);
+
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   final AuthService _auth = AuthService();
+
+  @override
+  void initState() {
+    super.initState();
+    DatabaseProvider.db.getFoods().then((foodList) =>
+        BlocProvider.of<FoodBloc>(context).add(SetFoods(foodList)));
+  }
 
   @override
   Widget build(BuildContext context) {

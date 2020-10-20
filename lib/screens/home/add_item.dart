@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:spoiler_alert/screens/home/home.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spoiler_alert/bloc/food_bloc.dart';
 import 'package:spoiler_alert/shared/constants.dart';
-import 'package:date_field/date_field.dart';
+import 'package:spoiler_alert/models/food.dart';
+import 'package:spoiler_alert/services/database_provider.dart';
+import 'package:spoiler_alert/events/add_food.dart';
 
 class AddItem extends StatelessWidget {
   @override
@@ -30,20 +33,6 @@ class AddItemFormState extends State<AddItemForm> {
   String _foodName = '';
   String _foodType = 'Best Before';
   DateTime _expiryDate = DateTime.now();
-
-  Future<Null> selectDate(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2100),
-    );
-    if (_expiryDate != null && _expiryDate != DateTime.now()) {
-      setState(() {
-        _expiryDate = picked;
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,14 +82,23 @@ class AddItemFormState extends State<AddItemForm> {
             SizedBox(
               height: 10.0,
             ),
-            DateTimeField(
-              onDateSelected: (DateTime value) {
-                setState(() {
-                  _expiryDate = value;
-                });
-              },
-              selectedDate: _expiryDate,
-            ),
+            Text(_expiryDate == null
+                ? "Choose expiry date"
+                : _expiryDate.toString()),
+            RaisedButton(
+                child: Text('Pick a date'),
+                onPressed: () {
+                  showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime.now(),
+                    lastDate: DateTime(2100),
+                  ).then((date) {
+                    setState(() {
+                      _expiryDate = date;
+                    });
+                  });
+                }),
             Row(children: [
               Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -111,6 +109,19 @@ class AddItemFormState extends State<AddItemForm> {
                             SnackBar(content: Text('Processing Data')));
                         Navigator.pop(context);
                       }
+
+                      _formKey.currentState.save();
+
+                      Food food = Food(
+                        name: _foodName,
+                        type: _foodType,
+                        expiryDate: _expiryDate,
+                      );
+
+                      DatabaseProvider.db.insert(food).then((storedFood) =>
+                          BlocProvider.of<FoodBloc>(context).add(
+                            AddFood(storedFood),
+                          ));
                     },
                     child: Text('Submit'),
                   )),
