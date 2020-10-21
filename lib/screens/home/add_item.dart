@@ -5,6 +5,8 @@ import 'package:spoiler_alert/shared/constants.dart';
 import 'package:spoiler_alert/models/food.dart';
 import 'package:spoiler_alert/services/database_provider.dart';
 import 'package:spoiler_alert/events/add_food.dart';
+import 'package:spoiler_alert/events/update_food.dart';
+import 'package:intl/intl.dart';
 
 class AddItem extends StatelessWidget {
   @override
@@ -21,6 +23,11 @@ class AddItem extends StatelessWidget {
 }
 
 class AddItemForm extends StatefulWidget {
+  final Food food;
+  final int foodIndex;
+
+  AddItemForm({this.food, this.foodIndex});
+
   @override
   AddItemFormState createState() {
     return AddItemFormState();
@@ -33,6 +40,8 @@ class AddItemFormState extends State<AddItemForm> {
   String _foodName = '';
   String _foodType = 'Best Before';
   DateTime _expiryDate = DateTime.now();
+  String _expiryDateString = '';
+  final DateFormat dateOnlyFormat = DateFormat('yyyy.MM.dd');
 
   @override
   Widget build(BuildContext context) {
@@ -96,35 +105,64 @@ class AddItemFormState extends State<AddItemForm> {
                   ).then((date) {
                     setState(() {
                       _expiryDate = date;
+                      dateOnlyFormat.format(_expiryDate);
+                      dateOnlyFormat.parse(_expiryDateString);
                     });
                   });
                 }),
             Row(children: [
-              Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: RaisedButton(
-                    onPressed: () {
-                      if (_formKey.currentState.validate()) {
-                        Scaffold.of(context).showSnackBar(
-                            SnackBar(content: Text('Processing Data')));
-                        Navigator.pop(context);
-                      }
+              widget.food == null
+                  ? Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: RaisedButton(
+                        onPressed: () {
+                          if (_formKey.currentState.validate()) {
+                            Scaffold.of(context).showSnackBar(
+                                SnackBar(content: Text('Processing Data')));
+                            Navigator.pop(context);
+                          }
 
-                      _formKey.currentState.save();
+                          _formKey.currentState.save();
 
-                      Food food = Food(
-                        name: _foodName,
-                        type: _foodType,
-                        expiryDate: _expiryDate,
-                      );
+                          Food food = Food(
+                            name: _foodName,
+                            type: _foodType,
+                            expiryDate: _expiryDateString,
+                          );
 
-                      DatabaseProvider.db.insert(food).then((storedFood) =>
-                          BlocProvider.of<FoodBloc>(context).add(
-                            AddFood(storedFood),
-                          ));
-                    },
-                    child: Text('Submit'),
-                  )),
+                          DatabaseProvider.db.insert(food).then((storedFood) =>
+                              BlocProvider.of<FoodBloc>(context).add(
+                                AddFood(storedFood),
+                              ));
+                        },
+                        child: Text('Submit'),
+                      ))
+                  : Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: RaisedButton(
+                        onPressed: () {
+                          if (_formKey.currentState.validate()) {
+                            Scaffold.of(context).showSnackBar(
+                                SnackBar(content: Text('Processing Data')));
+                            Navigator.pop(context);
+                          }
+
+                          _formKey.currentState.save();
+
+                          Food food = Food(
+                            name: _foodName,
+                            type: _foodType,
+                            expiryDate: _expiryDateString,
+                          );
+
+                          DatabaseProvider.db.update(widget.food).then(
+                              (storedFood) =>
+                                  BlocProvider.of<FoodBloc>(context).add(
+                                    UpdateFood(widget.foodIndex, food),
+                                  ));
+                        },
+                        child: Text('Update'),
+                      )),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),

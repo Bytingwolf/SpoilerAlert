@@ -2,7 +2,11 @@ import 'package:spoiler_alert/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseAuth _auth;
+
+  AuthService() {
+    this._auth = FirebaseAuth.instance;
+  }
 
   //create user object based on Firebase user
   User _userFromFirebaseUser(FirebaseUser user) {
@@ -60,5 +64,14 @@ class AuthService {
       print(e.toString());
       return null;
     }
+  }
+
+  Future<bool> isSignedIn() async {
+    var currentUser = await _auth.currentUser();
+    return currentUser != null;
+  }
+
+  Future<FirebaseUser> getCurrentUser() async {
+    return await _auth.currentUser();
   }
 }

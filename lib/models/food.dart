@@ -4,7 +4,7 @@ class Food {
   int id;
   String name;
   String type;
-  DateTime expiryDate;
+  String expiryDate;
 
   Food({this.id, this.name, this.type, this.expiryDate});
 
@@ -23,7 +23,7 @@ class Food {
   }
 
   Food.fromMap(Map<String, dynamic> map) {
-    id = map[DatabaseProvider.COLUMN_DATE];
+    id = map[DatabaseProvider.COLUMN_ID];
     name = map[DatabaseProvider.COLUMN_NAME];
     type = map[DatabaseProvider.COLUMN_TYPE];
     expiryDate = map[DatabaseProvider.COLUMN_DATE];

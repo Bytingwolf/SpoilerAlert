@@ -1,8 +1,10 @@
+import 'package:spoiler_alert/bloc/food_bloc.dart';
 import 'package:spoiler_alert/screens/authenticate/authenticate.dart';
 import 'package:spoiler_alert/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spoiler_alert/models/user.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Wrapper extends StatelessWidget {
   @override
@@ -14,7 +16,7 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return Authenticate();
     } else {
-      return Home();
+      //return Home();
     }
   }
 }
