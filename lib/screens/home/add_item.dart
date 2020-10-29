@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:spoiler_alert/bloc/food_bloc.dart';
 import 'package:spoiler_alert/shared/constants.dart';
-import 'package:spoiler_alert/models/food.dart';
-import 'package:spoiler_alert/services/database_provider.dart';
-import 'package:spoiler_alert/events/add_food.dart';
-import 'package:spoiler_alert/events/update_food.dart';
 import 'package:intl/intl.dart';
 
 class AddItem extends StatelessWidget {
@@ -23,10 +17,10 @@ class AddItem extends StatelessWidget {
 }
 
 class AddItemForm extends StatefulWidget {
-  final Food food;
-  final int foodIndex;
+  //final Food food;
+  //final int foodIndex;
 
-  AddItemForm({this.food, this.foodIndex});
+  //AddItemForm({this.food, this.foodIndex});
 
   @override
   AddItemFormState createState() {
@@ -111,20 +105,20 @@ class AddItemFormState extends State<AddItemForm> {
                   });
                 }),
             Row(children: [
-              widget.food == null
-                  ? Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: RaisedButton(
-                        onPressed: () {
-                          if (_formKey.currentState.validate()) {
-                            Scaffold.of(context).showSnackBar(
-                                SnackBar(content: Text('Processing Data')));
-                            Navigator.pop(context);
-                          }
+              //widget.food == null ?
+              Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: RaisedButton(
+                    onPressed: () {
+                      if (_formKey.currentState.validate()) {
+                        Scaffold.of(context).showSnackBar(
+                            SnackBar(content: Text('Processing Data')));
+                        Navigator.pop(context);
+                      }
 
-                          _formKey.currentState.save();
+                      _formKey.currentState.save();
 
-                          Food food = Food(
+                      /*Food food = Food(
                             name: _foodName,
                             type: _foodType,
                             expiryDate: _expiryDateString,
@@ -133,11 +127,11 @@ class AddItemFormState extends State<AddItemForm> {
                           DatabaseProvider.db.insert(food).then((storedFood) =>
                               BlocProvider.of<FoodBloc>(context).add(
                                 AddFood(storedFood),
-                              ));
-                        },
-                        child: Text('Submit'),
-                      ))
-                  : Padding(
+                              ));*/
+                    },
+                    child: Text('Submit'),
+                  ))
+              /*: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: RaisedButton(
                         onPressed: () {
@@ -162,7 +156,8 @@ class AddItemFormState extends State<AddItemForm> {
                                   ));
                         },
                         child: Text('Update'),
-                      )),
+                      ))*/
+              ,
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
